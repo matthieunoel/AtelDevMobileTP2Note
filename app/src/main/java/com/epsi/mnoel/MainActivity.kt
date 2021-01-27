@@ -10,9 +10,12 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import kotlinx.android.synthetic.main.activity_main.*
 
+//  https://console.firebase.google.com/u/0/project/ateldevmobile-tp2/settings/general/android:com.epsi.mnoel
+//  https://www.codevscolor.com/android-kotlin-create-basic-recyclerview
+
 class MainActivity : AppCompatActivity() {
 
-    val values = arrayOf("one", "two" , "three", "four", "five" , "six", "seven", "eight", "nine", "ten")
+    val values = arrayOf("01", "02" , "03", "04", "05" , "06", "07", "08", "09", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30")
 
     private lateinit var recyclerView: RecyclerView
     private lateinit var manager: RecyclerView.LayoutManager
