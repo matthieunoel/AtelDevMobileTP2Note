@@ -8,6 +8,8 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.google.firebase.ktx.Firebase
+import com.google.firebase.ktx.initialize
 import kotlinx.android.synthetic.main.activity_main.*
 
 //  https://console.firebase.google.com/u/0/project/ateldevmobile-tp2/settings/general/android:com.epsi.mnoel
@@ -15,7 +17,7 @@ import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
 
-    val values = arrayOf("01", "02" , "03", "04", "05" , "06", "07", "08", "09", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30")
+    val values = arrayOf("01", "Deux (plus du texte de test. Tu sais comment c'est lol ^^ . . . Anyway va te faire foutre ? Ouuaaaaaais mdr)" , "Trois", "Quatre", "05" , "Six", "07", "08", "Neuf", "10", "11", "Douze", "13", "14", "Quinze", "16", "Dix-sept", "18", "19", "Vingt", "21", "Vingt deux", "23", "24", "25", "26", "Vingt sept", "28", "29", "Trente")
 
     private lateinit var recyclerView: RecyclerView
     private lateinit var manager: RecyclerView.LayoutManager
@@ -28,6 +30,8 @@ class MainActivity : AppCompatActivity() {
         /*RecyclerView rv = (RecyclerView) findViewById(R.id.list);
         rv.setLayoutManager(new LinearLayoutManager(this))
         rv.setAdapter(new MyAdapter());*/
+
+        Firebase.initialize(application)
 
         var manager = LinearLayoutManager(this)
         var adpater = AdapterDuTurfu(values)
@@ -50,7 +54,7 @@ class AdapterDuTurfu(private val myDataSet : Array<String>):
 
     class ViewHolder(val view: View): RecyclerView.ViewHolder(view){
         fun bind(text: String){
-            val tv = view.findViewById<TextView>(R.id.textView)
+            val tv = view.findViewById<TextView>(R.id.titleView)
             tv.text = text
         }
     }

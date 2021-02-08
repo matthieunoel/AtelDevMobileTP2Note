@@ -3,19 +3,71 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:gravity="center">
+    android:gravity="top"
+    android:background="#FAFAFA"
+    android:elevation="2dp"
+    android:layout_marginBottom="8dp"
+    android:layout_marginLeft="8dp"
+    android:layout_marginRight="8dp"
+    android:layout_marginTop="8dp"
+    android:orientation="vertical">
 
     <TextView
-        android:text="TEST"
-        android:id="@+id/textView"
+        android:text="ERROR"
+        android:id="@+id/titleView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textSize="30sp"
-        android:layout_marginBottom="8dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginRight="8dp"
-        android:layout_marginTop="8dp"
         android:textColor="@color/black"
-        android:background="?attr/colorSecondaryVariant"/>
+        />
+
+    <!--<View
+        android:id="@+id/imageView"
+        android:layout_width="match_parent"
+        android:layout_height="290dp"
+        android:background="#515151"
+        />-->
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="match_parent"
+        android:layout_height="290dp"
+        android:background="@color/white"
+        android:src="@drawable/img_error"
+        />
+
+    <!--<TextView
+        android:text="SomeOtherText"
+        android:id="@+id/SomeOtherTextView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="30sp"
+        android:textColor="@color/black"/>-->
+
+    <!--<View
+        android:id="@+id/container"
+    android:layout_width="match_parent"
+    android:layout_height="300dp"
+    android:textSize="30sp"
+    android:layout_marginBottom="8dp"
+    android:layout_marginLeft="8dp"
+    android:layout_marginRight="8dp"
+    android:layout_marginTop="8dp"
+    android:textColor="@color/black"
+    android:background="#FAFAFA"
+        android:elevation="2dp">
+
+        <TextView
+            android:id="@+id/textView"
+            android:text="TEST"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@color/black"
+            android:background="#00FFFF"
+            android:textSize="30sp"
+            />
+
+    </View>-->
+
 </LinearLayout>
 
