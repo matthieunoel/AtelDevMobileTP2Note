@@ -1,16 +1,63 @@
+<!--<resources xmlns:tools="http://schemas.android.com/tools">
+    &lt;!&ndash; Base application theme. &ndash;&gt;
+    <style name="Theme.AtelDevMobileTP2Note" parent="Theme.MaterialComponents.DayNight.DarkActionBar">
+        &lt;!&ndash; Primary brand color. &ndash;&gt;
+        <item name="colorPrimary">@color/purple_200</item>
+        <item name="colorPrimaryVariant">@color/purple_700</item>
+        <item name="colorOnPrimary">@color/black</item>
+        &lt;!&ndash; Secondary brand color. &ndash;&gt;
+        <item name="colorSecondary">@color/teal_200</item>
+        <item name="colorSecondaryVariant">@color/teal_200</item>
+        <item name="colorOnSecondary">@color/black</item>
+        &lt;!&ndash; Status bar color. &ndash;&gt;
+        <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
+        &lt;!&ndash; Customize your theme here. &ndash;&gt;
+    </style>
+</resources>-->
+
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application theme. -->
     <style name="Theme.AtelDevMobileTP2Note" parent="Theme.MaterialComponents.DayNight.DarkActionBar">
         <!-- Primary brand color. -->
-        <item name="colorPrimary">@color/purple_200</item>
-        <item name="colorPrimaryVariant">@color/purple_700</item>
-        <item name="colorOnPrimary">@color/black</item>
+        <item name="colorPrimary">#007EA7</item>
+        <item name="colorPrimaryVariant">#003249</item>
+        <item name="colorOnPrimary">@color/white</item>
         <!-- Secondary brand color. -->
-        <item name="colorSecondary">@color/teal_200</item>
-        <item name="colorSecondaryVariant">@color/teal_200</item>
+        <item name="colorSecondary">#9AD1D4</item>
+        <item name="colorSecondaryVariant">#80CED7</item>
+        <!--        <item name="colorSecondaryLight">@color/white</item>-->
+        <!--        <item name="colorSecondaryDark">#c7c7c7</item>-->
         <item name="colorOnSecondary">@color/black</item>
         <!-- Status bar color. -->
         <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
         <!-- Customize your theme here. -->
     </style>
+
+    <style name="WhiteThing" parent="ThemeOverlay.AppCompat">
+        <item name="colorPrimary">#D6D6D6</item>
+        <item name="colorPrimaryVariant">#D6D6D6</item>
+        <item name="colorOnPrimary">@color/black</item>
+        <item name="colorSecondary">#D6D6D6</item>
+        <item name="colorSecondaryVariant">#D6D6D6</item>
+        <item name="colorOnSecondary">@color/black</item>
+    </style>
+
+    <style name="PinkTextInput" parent="ThemeOverlay.AppCompat">
+        <item name="colorPrimary">#FF6FA5</item>
+        <item name="colorPrimaryVariant">#FF6FA5</item>
+        <item name="colorOnPrimary">@color/black</item>
+        <item name="colorSecondary">#FF6FA5</item>
+        <item name="colorSecondaryVariant">#FF6FA5</item>
+        <item name="colorOnSecondary">@color/black</item>
+    </style>
+
+    <style name="test" parent="ThemeOverlay.AppCompat">
+        <item name="colorPrimary">#FFFF00</item>
+        <item name="colorPrimaryVariant">#00FFFF</item>
+        <item name="colorOnPrimary">#FF00FF</item>
+        <item name="colorSecondary">#FF0000</item>
+        <item name="colorSecondaryVariant">#00FF00</item>
+        <item name="colorOnSecondary">#0000FF</item>
+    </style>
+
 </resources>

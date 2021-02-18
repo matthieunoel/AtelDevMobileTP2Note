@@ -15,4 +15,32 @@
         <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
         <!-- Customize your theme here. -->
     </style>
+
+    <style name="WhiteThing" parent="ThemeOverlay.AppCompat">
+        <item name="colorPrimary">#D6D6D6</item>
+        <item name="colorPrimaryVariant">#D6D6D6</item>
+        <item name="colorOnPrimary">@color/black</item>
+        <item name="colorSecondary">#D6D6D6</item>
+        <item name="colorSecondaryVariant">#D6D6D6</item>
+        <item name="colorOnSecondary">@color/black</item>
+    </style>
+
+    <style name="PinkTextInput" parent="ThemeOverlay.AppCompat">
+        <item name="colorPrimary">#FF6FA5</item>
+        <item name="colorPrimaryVariant">#FF6FA5</item>
+        <item name="colorOnPrimary">@color/black</item>
+        <item name="colorSecondary">#FF6FA5</item>
+        <item name="colorSecondaryVariant">#FF6FA5</item>
+        <item name="colorOnSecondary">@color/black</item>
+    </style>
+
+    <style name="test" parent="ThemeOverlay.AppCompat">
+        <item name="colorPrimary">#FFFF00</item>
+        <item name="colorPrimaryVariant">#00FFFF</item>
+        <item name="colorOnPrimary">#FF00FF</item>
+        <item name="colorSecondary">#FF0000</item>
+        <item name="colorSecondaryVariant">#00FF00</item>
+        <item name="colorOnSecondary">#0000FF</item>
+    </style>
+
 </resources>
