@@ -119,72 +119,20 @@ class AdapterDuTurfu(private val myDataSet: Array<Livre>):
 
     class ViewHolder(val view: View): RecyclerView.ViewHolder(view){
         fun bind(livre: Livre){
-            val tv = view.findViewById<TextView>(R.id.titleView)
-
-            if (livre.auteur != null) {
-                tv.text = livre.titre + "\r\n" + livre.auteur
-            }
-            else {
-                tv.text = livre.titre
-            }
-
-            /*if (livre.img != null) {
-//                view.findViewById<ImageView>(R.id.imageView).setImageURI(Uri.parse(livre.img))
-
-                val imageBytes = Base64.decode(livre.img, Base64.DEFAULT)
-                Log.i("MNOELREADTHIS", "imageBytes : $imageBytes")
-                val decodedImage = BitmapFactory.decodeByteArray(imageBytes, 0, imageBytes.size)
-                Log.i("MNOELREADTHIS", "decodedImage : $decodedImage")
-//                view.findViewById<ImageView>(R.id.imageView).setImageBitmap(decodedImage)
-                view.findViewById<ImageView>(R.id.imageView).setImageBitmap(decodedImage)
-            }*/
-
-            /* ##### */
-
-            /*var storage:FirebaseStorage  = FirebaseStorage.getInstance()
-
-            var livre1ImgRef = storage.getReference()
-
-            var img = livre1ImgRef.child("images/livre_1.jpg")
-
-            Log.i("MNOELREADTHIS", "Livre1Img : " + img)*/
-
-            /* ##### */
-
-            /*// Reference to an image file in Cloud Storage
-//            StorageReference storageReference = = FirebaseStorage.getInstance().getReference().child("yourImageReferencePath");
-
-            var storageReference:Any  = FirebaseStorage.getInstance().getReference().child("images/livre_1.jpg");
-            Log.i("MNOELREADTHIS", "storageReference : $storageReference")
-
-//            ImageView image = (ImageView)findViewById(R.id.imageView);
-
-            var image: ImageView = view.findViewById<ImageView>(R.id.imageView)
-            Log.i("MNOELREADTHIS", "image : $image")
-
-            // Load the image using Glide
-            Glide.with(this.view)
-//                .using(FirebaseImageLoader())
-                .load(storageReference)
-                .into(image)*/
-
-            /* ##### */
-
-            // WORKING CODE!
-            val storage = FirebaseStorage.getInstance()
-
-            // Create a reference to a file from a Google Cloud Storage URI
-            val gsReference = storage.getReferenceFromUrl("gs://ateldevmobile-tp2.appspot.com/images/livre_1.jpg")
-
+            val titleView = view.findViewById<TextView>(R.id.titleView)
             var imageView: ImageView = view.findViewById<ImageView>(R.id.imageView)
 
-            /*GlideApp.with(this.view)
-                .load(gsReference)
-                .into(imageView)*/
+            if (livre.auteur != null) {
+                titleView.text = livre.titre + "\r\n" + livre.auteur
+            }
+            else {
+                titleView.text = livre.titre
+            }
 
-            Glide.with(this.view)
-                .load(gsReference)
-                .into(imageView)
+            if (livre.img != null) {
+                val gsReference = FirebaseStorage.getInstance().getReferenceFromUrl("gs://ateldevmobile-tp2.appspot.com" + livre.img)
+                Glide.with(this.view).load(gsReference).into(imageView)
+            }
 
         }
     }
