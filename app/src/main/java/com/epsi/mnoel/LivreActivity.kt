@@ -1,9 +1,10 @@
 package com.epsi.mnoel
 
+import android.R.array
+import android.content.Context
 import android.os.Bundle
 import android.util.Log
 import android.view.View
-import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import com.bumptech.glide.Glide
 import com.google.firebase.storage.FirebaseStorage
@@ -11,31 +12,21 @@ import kotlinx.android.synthetic.main.activity_livre.*
 import kotlinx.android.synthetic.main.activity_login.*
 import kotlinx.android.synthetic.main.activity_main.*
 
+
 class LivreActivity : AppCompatActivity() {
+
+    private lateinit var livre: Livre
 
     override fun onCreate(savedInstanceState: Bundle?) {
 
-//        val livre: Livre? = intent.getSerializableExtra("Editing") as Livre?
-
-        val livre: Livre? = Livre(intent.getIntExtra("id", 0), intent.getStringExtra("titre"), intent.getStringExtra("desc"), intent.getStringExtra("auteur"), intent.getStringExtra("img"))
+        this.livre = Livre(intent.getIntExtra("id", 0), intent.getStringExtra("titre"), intent.getStringExtra("desc"), intent.getStringExtra("auteur"), intent.getStringExtra("img"))
 
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_livre)
 
-        /*if (livre != null) {
-            intent.putExtra("id", livre.id)
-            intent.putExtra("titre", livre.titre)
-            intent.putExtra("desc", livre.desc)
-            intent.putExtra("auteur", livre.auteur)
-            intent.putExtra("img", livre.img)
-        }*/
         Log.i("MNOELREADME", "livre C : ${livre.toString()}")
 
         if (livre != null) {
-//            val titre = livre.titre + "\r\n" + livre.auteur
-//            Log.i("MNOELREADME", "titre : $titre")
-//            val titre = this.findViewById<TextView>(R.id.titre)
-//            this.titre.text = "Ouioui"
             this.titre.text = livre.titre + "\r\n" + livre.auteur
             this.desc.text = livre.desc
             if (livre.img != null) {
@@ -49,8 +40,54 @@ class LivreActivity : AppCompatActivity() {
             }
         }
 
+        Log.i("MNOELREADTHIS", "thereIsLivre : ${getSharedPreferences("listeLivresLus", Context.MODE_PRIVATE).getString("value", null).toString().split(",").contains(this.livre.id.toString()).toString()}")
 
+        if (getSharedPreferences("listeLivresLus", Context.MODE_PRIVATE).getString("value", "").toString().split(",").contains(this.livre.id.toString())) {
+            this.checkBox1.isChecked = true
+        }
 
+        this.checkBox1.setOnClickListener {
+//            Log.i("MNOELREADTHIS", "CheckBox clicked !")
+            if (this.checkBox1.isChecked) {
+                val sp = getSharedPreferences("listeLivresLus", Context.MODE_PRIVATE);
+                var listeLivresLus: String = sp.getString("value", null).toString()
+
+                if (listeLivresLus != null && listeLivresLus != "") {
+                    listeLivresLus += ",${this.livre.id.toString()}"
+                }
+                else {
+                    listeLivresLus = this.livre.id.toString()
+                }
+
+//                Log.i("MNOELLISTE", "listeLivresLus : $listeLivresLus")
+
+                val ed = sp.edit()
+                ed.putString("value", listeLivresLus)
+                ed.apply()
+            }
+            else {
+                val sp = getSharedPreferences("listeLivresLus", Context.MODE_PRIVATE);
+
+                val listeLivresLusOld: List<String> = sp.getString("value", null).toString().split(",")
+                var listeLivresLusNew: String = ""
+//                var founded: Boolean = false
+                for (livreId in listeLivresLusOld) {
+                    if (livreId != this.livre.id.toString()) {
+                        listeLivresLusNew += ",$livreId"
+                    }
+                }
+
+                if (listeLivresLusNew != "") {
+                    listeLivresLusNew = listeLivresLusNew.substring(1)
+                }
+
+//                Log.i("MNOELLISTE", "listeLivresLusNew : $listeLivresLusNew")
+
+                val ed = sp.edit()
+                ed.putString("value", listeLivresLusNew)
+                ed.apply()
+            }
+        }
 
 
     }

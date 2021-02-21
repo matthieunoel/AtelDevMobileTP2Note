@@ -1,8 +1,10 @@
 package com.epsi.mnoel
 
 import android.app.Activity
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
@@ -56,6 +58,13 @@ class LoginActivity : AppCompatActivity() {
                     ).show()
 
                     val user = auth.currentUser
+
+                    Log.i("MNOELREADTHIS", "userUid : ${user?.uid}")
+
+                    val sp = getSharedPreferences("userUid", Context.MODE_PRIVATE);
+                    val ed = sp.edit()
+                    ed.putString("value", user?.uid)
+                    ed.apply()
 
                     val intent = Intent(this, MainActivity::class.java)
                     startActivity(intent)

@@ -3,6 +3,7 @@ package com.epsi.mnoel
 import android.content.Context
 import android.content.ContextWrapper
 import android.content.Intent
+import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.os.Parcelable
 import android.util.Log
@@ -22,6 +23,7 @@ import com.google.firebase.database.ValueEventListener
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.ktx.initialize
 import com.google.firebase.storage.FirebaseStorage
+import kotlinx.android.synthetic.main.activity_livre.*
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.list_item.view.*
 
@@ -43,6 +45,19 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
+        // #####
+
+        /*val sp = getSharedPreferences("userUid", Context.MODE_PRIVATE);
+        val ed = sp.edit()
+        ed.putString("value", user?.uid)
+        ed.apply()*/
+
+        val sp = getSharedPreferences("userUid", Context.MODE_PRIVATE);
+        val userUid = sp.getString("value", "").toString()
+        Log.i("MNOELREADTHIS", "userUid : $userUid")
+
+        // #####
 
         Firebase.initialize(application)
 
@@ -141,6 +156,15 @@ class AdapterDuTurfu(private val myDataSet: Array<Livre>):
             }
             else {
                 titleView.text = livre.titre
+            }
+
+            if (this.getActivity()?.getSharedPreferences("listeLivresLus", Context.MODE_PRIVATE)?.getString("value", "").toString().split(",").contains(livre.id.toString())) {
+                this.view.titleView.background = ColorDrawable(0xFF97C908.toInt())
+                this.view.titleView.setTextColor(0xFF4A7600.toInt())
+            }
+            else {
+                this.view.titleView.setBackground(ColorDrawable(0xFFF84B44.toInt()))
+                this.view.titleView.setTextColor(0xFF8A2415.toInt())
             }
 
             if (livre.img != null) {
