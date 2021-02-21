@@ -29,6 +29,9 @@ class LoginActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
 
+        /*this.form_username.setText("matthieu.noel@epsi.fr")
+        this.form_password.setText("passpass")*/
+
         Firebase.initialize(application)
         auth = Firebase.auth
 
@@ -44,7 +47,7 @@ class LoginActivity : AppCompatActivity() {
         var formUsername = (findViewById<EditText>(R.id.form_username)).text.toString()
         var formPassword = (findViewById<EditText>(R.id.form_password)).text.toString()
 
-        if (formUsername != "") {
+        if (formUsername != "" && formPassword != "") {
 
             if (formPassword == "") {
                 formPassword = " "
@@ -71,13 +74,19 @@ class LoginActivity : AppCompatActivity() {
                     this.finish()
 
                 } else {
-                    this.alert("Erreur de connection", "Le couple Username/Password est incorrect.")
+                    this.alert("Erreur de connection", "Mauvais login / mot de passe")
                 }
             }
 
         }
+        else if(formUsername == "" && formPassword != "") {
+            this.alert("Erreur de connection", "L'email est vide");
+        }
+        else if(formPassword == "" && formUsername != "") {
+            this.alert("Erreur de connection", "Le mot de passe est vide");
+        }
         else {
-            this.alert("Nom d'utilisateur", "Erreur : ce champ ne peut pas être vide.")
+            this.alert("Erreur de connection", "Les champs sont vides");
         }
     }
 

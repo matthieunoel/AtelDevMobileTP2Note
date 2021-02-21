@@ -10,7 +10,9 @@ public class Livre /*: Parcelable*/ {
     var auteur: String? = null
     var img: String? = null
 
-    constructor() {}
+    constructor() {
+        this.id = -1
+    }
 
     constructor(id: Int?, titre: String?, desc: String?) : this() {
         this.id = id

@@ -27,7 +27,6 @@
             android:layout_height="wrap_content"
             android:theme="@style/PinkTextInput"
             android:layout_marginTop="30dp"
-            android:text="matthieu.noel@epsi.fr"
             />
 
         <EditText
@@ -38,7 +37,6 @@
             android:layout_height="wrap_content"
             android:theme="@style/PinkTextInput"
             android:layout_marginTop="30dp"
-            android:text="passpass"
             />
 
         <com.google.android.material.button.MaterialButton

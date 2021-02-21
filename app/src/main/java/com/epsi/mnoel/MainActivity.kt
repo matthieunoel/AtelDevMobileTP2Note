@@ -79,11 +79,11 @@ class MainActivity : AppCompatActivity() {
                     }
                 }
 
-                var manager = LinearLayoutManager(this@MainActivity)
+//                var manager = LinearLayoutManager(this@MainActivity)
                 var adpater = AdapterDuTurfu(this@MainActivity.listeLivres)
 
                 this@MainActivity.recycler_view.adapter = adpater
-                this@MainActivity.recycler_view.layoutManager = manager
+//                this@MainActivity.recycler_view.layoutManager = manager
 
                 this@MainActivity.isTotalyInit = true
 
@@ -100,7 +100,7 @@ class MainActivity : AppCompatActivity() {
         var adpater = AdapterDuTurfu(
                 arrayOf(
                         Livre(
-                                0,
+                                -1,
                                 "Chargement en cours ...",
                                 "Chargement en cours ..."
                         )
@@ -136,11 +136,11 @@ class MainActivity : AppCompatActivity() {
         super.onResume();
 
         if (this.isTotalyInit) {
-            var manager = LinearLayoutManager(this@MainActivity)
+//            var manager = LinearLayoutManager(this@MainActivity)
             var adpater = AdapterDuTurfu(this@MainActivity.listeLivres)
 
             this@MainActivity.recycler_view.adapter = adpater
-            this@MainActivity.recycler_view.layoutManager = manager
+//            this@MainActivity.recycler_view.layoutManager = manager
         }
 
     }
@@ -182,7 +182,7 @@ class AdapterDuTurfu(private val myDataSet: Array<Livre>):
                 this.view.titleView.background = ColorDrawable(0xFF97C908.toInt())
                 this.view.titleView.setTextColor(0xFF4A7600.toInt())
             }
-            else {
+            else if (livre.id != -1) {
                 this.view.titleView.setBackground(ColorDrawable(0xFFF84B44.toInt()))
                 this.view.titleView.setTextColor(0xFF8A2415.toInt())
             }
