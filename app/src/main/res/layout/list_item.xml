@@ -29,5 +29,20 @@
         android:src="@drawable/img_error"
         />
 
+    <ProgressBar
+        style="?android:attr/progressBarStyleLarge"
+        android:layout_width="match_parent"
+        android:layout_height="290dp"
+        android:id="@+id/loading"
+        android:progressDrawable="@drawable/circular_progress_bar"
+        android:layout_below="@+id/button"
+        android:layout_alignRight="@+id/textView"
+        android:layout_alignEnd="@+id/textView"
+        android:layout_alignLeft="@+id/textview"
+        android:layout_alignStart="@+id/textview"
+        android:layout_alignParentBottom="true"
+        android:visibility="gone"
+        />
+
 </LinearLayout>
 

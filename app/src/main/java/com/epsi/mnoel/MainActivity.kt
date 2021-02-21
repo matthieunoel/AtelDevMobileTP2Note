@@ -1,8 +1,10 @@
 package com.epsi.mnoel
 
 import android.content.Context
+import android.content.ContextWrapper
+import android.content.Intent
 import android.os.Bundle
-import android.text.Editable
+import android.os.Parcelable
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -13,10 +15,6 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.bumptech.glide.Registry
-import com.bumptech.glide.annotation.GlideModule
-import com.bumptech.glide.module.AppGlideModule
-import com.firebase.ui.storage.images.FirebaseImageLoader
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
@@ -24,10 +22,9 @@ import com.google.firebase.database.ValueEventListener
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.ktx.initialize
 import com.google.firebase.storage.FirebaseStorage
-import com.google.firebase.storage.StorageReference
 import kotlinx.android.synthetic.main.activity_main.*
-import java.io.InputStream
-import com.epsi.mnoel.FireBaseCompatibleGlideModule
+import kotlinx.android.synthetic.main.list_item.view.*
+
 
 //import java.lang.reflect.Array
 
@@ -87,13 +84,13 @@ class MainActivity : AppCompatActivity() {
 
         var manager = LinearLayoutManager(this)
         var adpater = AdapterDuTurfu(
-            arrayOf(
-                Livre(
-                    0,
-                    "Chargement en cours ...",
-                    "Chargement en cours ..."
+                arrayOf(
+                        Livre(
+                                0,
+                                "Chargement en cours ...",
+                                "Chargement en cours ..."
+                        )
                 )
-            )
         )
 
         this.recycler_view.adapter = adpater
@@ -112,6 +109,23 @@ class MainActivity : AppCompatActivity() {
         /* ##### */
 
     }
+
+    public fun navigateToLivre(livre: Livre) {
+//        Log.i("MNOELREADME", "livre B : ${livre.toString()}")
+        val intent = Intent(this, LivreActivity::class.java)
+        /*val b = Bundle()
+        b.putParcelable("livre", livre as Parcelable)
+        intent.putExtras(b)*/
+//        intent.putExtra("livre", livre as Parcelable)
+        intent.putExtra("id", livre.id)
+        intent.putExtra("titre", livre.titre)
+        intent.putExtra("desc", livre.desc)
+        intent.putExtra("auteur", livre.auteur)
+        intent.putExtra("img", livre.img)
+        startActivity(intent)
+//        finish()
+    }
+
 }
 
 class AdapterDuTurfu(private val myDataSet: Array<Livre>):
@@ -130,11 +144,42 @@ class AdapterDuTurfu(private val myDataSet: Array<Livre>):
             }
 
             if (livre.img != null) {
-                val gsReference = FirebaseStorage.getInstance().getReferenceFromUrl("gs://ateldevmobile-tp2.appspot.com" + livre.img)
-                Glide.with(this.view).load(gsReference).into(imageView)
+                try{
+                    val gsReference = FirebaseStorage.getInstance().getReferenceFromUrl("gs://ateldevmobile-tp2.appspot.com" + livre.img)
+                    Glide.with(this.view).load(gsReference).into(imageView)
+                } catch (ex: Exception) {
+                    Log.e("MNOELREADME", "Error message : ${ex.message}")
+                    imageView.setImageDrawable(R.drawable.img_error)
+                }
+            }
+            else {
+                this.view.imageView.visibility = View.GONE
+                this.view.loading.visibility = View.VISIBLE
+            }
+
+            this.view.setOnClickListener {
+//                Log.i("MNOELREADTHIS", "CLICK!")
+//                Log.i("MNOELREADME", "livre A : ${livre.toString()}")
+                /*val intent = Intent(this, LivreActivity::class.java)
+                startActivity(intent)*/
+                this.getActivity()?.navigateToLivre(livre)
+                /*val relativeLayout = (this.view.getParent() as ViewGroup).parent as RelativeLayout
+                relativeLayout*/
             }
 
         }
+
+        private fun getActivity(): MainActivity? {
+            var context: Context = this.view.context
+            while (context is ContextWrapper) {
+                if (context is MainActivity) {
+                    return context
+                }
+                context = (context).baseContext
+            }
+            return null
+        }
+
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -152,34 +197,7 @@ class AdapterDuTurfu(private val myDataSet: Array<Livre>):
 
 }
 
-class Livre {
-    var id: Int? = null
-    var titre: String? = null
-    var desc: String? = null
-    var auteur: String? = null
-    var img: String? = null
-
-    constructor() {}
-    constructor(
-        id: Int?,
-        titre: String?,
-        desc: String?
-    ) {
-        this.id = id
-        this.titre = titre
-        this.desc = desc
-    }
-    constructor(
-        id: Int?,
-        titre: String?,
-        desc: String?,
-        auteur: String?,
-        img: String?
-    ) {
-        this.id = id
-        this.titre = titre
-        this.desc = desc
-        this.auteur = auteur
-        this.img = img
-    }
+private fun Any.setImageDrawable(imgError: Int) {
+    TODO("Not yet implemented")
+    // What am I supposed to do ?!
 }

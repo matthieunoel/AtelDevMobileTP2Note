@@ -1,5 +1,6 @@
 package com.epsi.mnoel
 
+import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
@@ -58,6 +59,7 @@ class LoginActivity : AppCompatActivity() {
 
                     val intent = Intent(this, MainActivity::class.java)
                     startActivity(intent)
+                    this.finish()
 
                 } else {
                     this.alert("Erreur de connection", "Le couple Username/Password est incorrect.")
