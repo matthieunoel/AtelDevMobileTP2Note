@@ -1,9 +1,8 @@
 package com.epsi.mnoel
 
-import android.os.Parcel
-import android.os.Parcelable
 
-public class Livre /*: Parcelable*/ {
+class Livre {
+
     var id: Int? = null
     var titre: String? = null
     var desc: String? = null
@@ -28,33 +27,4 @@ public class Livre /*: Parcelable*/ {
         this.img = img
     }
 
-    /*constructor(parcel: Parcel) : this() {
-        id = parcel.readValue(Int::class.java.classLoader) as? Int
-        titre = parcel.readString()
-        desc = parcel.readString()
-        auteur = parcel.readString()
-        img = parcel.readString()
-    }
-
-    override fun writeToParcel(parcel: Parcel, flags: Int) {
-        parcel.writeValue(id)
-        parcel.writeString(titre)
-        parcel.writeString(desc)
-        parcel.writeString(auteur)
-        parcel.writeString(img)
-    }
-
-    override fun describeContents(): Int {
-        return 0
-    }
-
-    companion object CREATOR : Parcelable.Creator<Livre> {
-        override fun createFromParcel(parcel: Parcel): Livre {
-            return Livre(parcel)
-        }
-
-        override fun newArray(size: Int): Array<Livre?> {
-            return arrayOfNulls(size)
-        }
-    }*/
 }

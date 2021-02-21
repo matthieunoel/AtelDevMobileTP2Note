@@ -5,7 +5,6 @@ import android.content.ContextWrapper
 import android.content.Intent
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
-import android.os.Parcelable
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -26,19 +25,8 @@ import com.google.firebase.storage.FirebaseStorage
 import kotlinx.android.synthetic.main.activity_livre.*
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.list_item.view.*
-import java.beans.PropertyChangeEvent
-
-
-//import java.lang.reflect.Array
-
-//  https://console.firebase.google.com/u/0/project/ateldevmobile-tp2/settings/general/android:com.epsi.mnoel
-//  https://www.codevscolor.com/android-kotlin-create-basic-recyclerview
 
 class MainActivity : AppCompatActivity() {
-
-    /*private lateinit var recyclerView: RecyclerView
-    private lateinit var manager: RecyclerView.LayoutManager
-    private lateinit var myAdapter: RecyclerView.Adapter<*>*/
 
     private lateinit var listeLivres: Array<Livre>
     private var isTotalyInit = false;
@@ -46,19 +34,6 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-
-        // #####
-
-        /*val sp = getSharedPreferences("userUid", Context.MODE_PRIVATE);
-        val ed = sp.edit()
-        ed.putString("value", user?.uid)
-        ed.apply()*/
-
-        val sp = getSharedPreferences("userUid", Context.MODE_PRIVATE);
-        val userUid = sp.getString("value", "").toString()
-        Log.i("MNOELREADTHIS", "userUid : $userUid")
-
-        // #####
 
         Firebase.initialize(application)
 
@@ -79,11 +54,8 @@ class MainActivity : AppCompatActivity() {
                     }
                 }
 
-//                var manager = LinearLayoutManager(this@MainActivity)
                 var adpater = AdapterDuTurfu(this@MainActivity.listeLivres)
-
                 this@MainActivity.recycler_view.adapter = adpater
-//                this@MainActivity.recycler_view.layoutManager = manager
 
                 this@MainActivity.isTotalyInit = true
 
@@ -97,68 +69,30 @@ class MainActivity : AppCompatActivity() {
         dbLivresRef.get()
 
         var manager = LinearLayoutManager(this)
-        var adpater = AdapterDuTurfu(
-                arrayOf(
-                        Livre(
-                                -1,
-                                "Chargement en cours ...",
-                                "Chargement en cours ..."
-                        )
-                )
-        )
+        var adpater = AdapterDuTurfu(arrayOf(Livre(-1, "Chargement en cours ...", "Chargement en cours ...")))
 
         this.recycler_view.adapter = adpater
         this.recycler_view.layoutManager = manager
-
-        /* ##### */
-
-//        var storage:FirebaseStorage  = FirebaseStorage.getInstance()
-//
-//        var livre1ImgRef = storage.getReference()
-//
-//        var img = livre1ImgRef.child("livre_1.png")
-//
-//        Log.i("MNOELREADTHIS", "Livre1Img : " + img)
-
-        /* ##### */
-
-        /*var manager = LinearLayoutManager(this@MainActivity)
-        var adpater = AdapterDuTurfu(this@MainActivity.listeLivres)
-
-        this@MainActivity.recycler_view.adapter = adpater
-        this@MainActivity.recycler_view.layoutManager = manager*/
-
-
 
     }
 
     override fun onResume() {
         super.onResume();
-
         if (this.isTotalyInit) {
-//            var manager = LinearLayoutManager(this@MainActivity)
             var adpater = AdapterDuTurfu(this@MainActivity.listeLivres)
-
             this@MainActivity.recycler_view.adapter = adpater
-//            this@MainActivity.recycler_view.layoutManager = manager
         }
-
     }
 
-    public fun navigateToLivre(livre: Livre) {
+    fun navigateToLivre(livre: Livre) {
 //        Log.i("MNOELREADME", "livre B : ${livre.toString()}")
         val intent = Intent(this, LivreActivity::class.java)
-        /*val b = Bundle()
-        b.putParcelable("livre", livre as Parcelable)
-        intent.putExtras(b)*/
-//        intent.putExtra("livre", livre as Parcelable)
         intent.putExtra("id", livre.id)
         intent.putExtra("titre", livre.titre)
         intent.putExtra("desc", livre.desc)
         intent.putExtra("auteur", livre.auteur)
         intent.putExtra("img", livre.img)
         startActivity(intent)
-//        finish()
     }
 
 }
@@ -204,11 +138,7 @@ class AdapterDuTurfu(private val myDataSet: Array<Livre>):
             this.view.setOnClickListener {
 //                Log.i("MNOELREADTHIS", "CLICK!")
 //                Log.i("MNOELREADME", "livre A : ${livre.toString()}")
-                /*val intent = Intent(this, LivreActivity::class.java)
-                startActivity(intent)*/
                 this.getActivity()?.navigateToLivre(livre)
-                /*val relativeLayout = (this.view.getParent() as ViewGroup).parent as RelativeLayout
-                relativeLayout*/
             }
 
         }

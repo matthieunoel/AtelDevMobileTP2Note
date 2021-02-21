@@ -1,6 +1,5 @@
 package com.epsi.mnoel
 
-import android.R.array
 import android.content.Context
 import android.os.Bundle
 import android.util.Log
@@ -9,8 +8,6 @@ import androidx.appcompat.app.AppCompatActivity
 import com.bumptech.glide.Glide
 import com.google.firebase.storage.FirebaseStorage
 import kotlinx.android.synthetic.main.activity_livre.*
-import kotlinx.android.synthetic.main.activity_login.*
-import kotlinx.android.synthetic.main.activity_main.*
 
 
 class LivreActivity : AppCompatActivity() {
@@ -24,7 +21,7 @@ class LivreActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_livre)
 
-        Log.i("MNOELREADME", "livre C : ${livre.toString()}")
+//        Log.i("MNOELREADME", "livre C : ${livre.toString()}")
 
         if (livre != null) {
             this.titre.text = livre.titre + "\r\n" + livre.auteur
@@ -40,7 +37,7 @@ class LivreActivity : AppCompatActivity() {
             }
         }
 
-        Log.i("MNOELREADTHIS", "thereIsLivre : ${getSharedPreferences("listeLivresLus", Context.MODE_PRIVATE).getString("value", null).toString().split(",").contains(this.livre.id.toString()).toString()}")
+//        Log.i("MNOELREADTHIS", "thereIsLivre : ${getSharedPreferences("listeLivresLus", Context.MODE_PRIVATE).getString("value", null).toString().split(",").contains(this.livre.id.toString()).toString()}")
 
         if (getSharedPreferences("listeLivresLus", Context.MODE_PRIVATE).getString("value", "").toString().split(",").contains(this.livre.id.toString())) {
             this.checkBox1.isChecked = true
@@ -69,7 +66,7 @@ class LivreActivity : AppCompatActivity() {
                 val sp = getSharedPreferences("listeLivresLus", Context.MODE_PRIVATE);
 
                 val listeLivresLusOld: List<String> = sp.getString("value", null).toString().split(",")
-                var listeLivresLusNew: String = ""
+                var listeLivresLusNew = ""
 //                var founded: Boolean = false
                 for (livreId in listeLivresLusOld) {
                     if (livreId != this.livre.id.toString()) {
