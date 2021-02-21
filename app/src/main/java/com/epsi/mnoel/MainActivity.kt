@@ -26,21 +26,22 @@ import com.google.firebase.storage.FirebaseStorage
 import kotlinx.android.synthetic.main.activity_livre.*
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.list_item.view.*
+import java.beans.PropertyChangeEvent
 
 
 //import java.lang.reflect.Array
-
 
 //  https://console.firebase.google.com/u/0/project/ateldevmobile-tp2/settings/general/android:com.epsi.mnoel
 //  https://www.codevscolor.com/android-kotlin-create-basic-recyclerview
 
 class MainActivity : AppCompatActivity() {
 
-    private lateinit var recyclerView: RecyclerView
+    /*private lateinit var recyclerView: RecyclerView
     private lateinit var manager: RecyclerView.LayoutManager
-    private lateinit var myAdapter: RecyclerView.Adapter<*>
+    private lateinit var myAdapter: RecyclerView.Adapter<*>*/
 
     private lateinit var listeLivres: Array<Livre>
+    private var isTotalyInit = false;
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -84,14 +85,12 @@ class MainActivity : AppCompatActivity() {
                 this@MainActivity.recycler_view.adapter = adpater
                 this@MainActivity.recycler_view.layoutManager = manager
 
+                this@MainActivity.isTotalyInit = true
+
             }
 
             override fun onCancelled(databaseError: DatabaseError) {
-                Log.i("MNOELREADTHIS", "onCancelled: Error: " + databaseError.message)
-            }
-
-            override fun toString(): String {
-                return "FUCK YOU !"
+                Log.e("MNOELREADTHIS", "onCancelled: Error: " + databaseError.message)
             }
         })
 
@@ -122,6 +121,27 @@ class MainActivity : AppCompatActivity() {
 //        Log.i("MNOELREADTHIS", "Livre1Img : " + img)
 
         /* ##### */
+
+        /*var manager = LinearLayoutManager(this@MainActivity)
+        var adpater = AdapterDuTurfu(this@MainActivity.listeLivres)
+
+        this@MainActivity.recycler_view.adapter = adpater
+        this@MainActivity.recycler_view.layoutManager = manager*/
+
+
+
+    }
+
+    override fun onResume() {
+        super.onResume();
+
+        if (this.isTotalyInit) {
+            var manager = LinearLayoutManager(this@MainActivity)
+            var adpater = AdapterDuTurfu(this@MainActivity.listeLivres)
+
+            this@MainActivity.recycler_view.adapter = adpater
+            this@MainActivity.recycler_view.layoutManager = manager
+        }
 
     }
 
