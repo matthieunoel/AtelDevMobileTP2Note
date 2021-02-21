@@ -9,5 +9,5 @@ Les fichiers des activités : [Kotlin and Java files](https://github.com/matthie
 </br>
 Les fichiers de layout : [Layout](https://github.com/matthieunoel/AtelDevMobileTP2Note/tree/sensei/app/src/main/res/layout)
 
-#Credits
+# Credits
 Bisous ♥
